@@ -46,11 +46,11 @@ class LoginController extends Controller
     {
         if (Auth::attempt(['username' =>$request->get('username'),'password' =>$request->get('password')])) {
         
-            dd('good');
+            return response()->json(['success'=> true, 'message'=> 'logged.']);
 
         }else
         {
-            dd('bad');
+            return response()->json(['success'=> false, 'error'=> $validator->messages()]);
 
 
         }

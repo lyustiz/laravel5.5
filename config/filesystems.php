@@ -63,6 +63,11 @@ return [
             'bucket' => env('AWS_BUCKET'),
         ],
 
+        'views' => [
+            'driver' => 'local',
+            'root' => 'app/resources/views',
+        ],
+
     ],
 
 ];

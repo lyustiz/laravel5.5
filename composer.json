@@ -9,15 +9,15 @@
         "adldap2/adldap2-laravel": "^4.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0",
-        "yajra/laravel-oci8": "5.5.*"
+        "laravel/tinker": "~1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~6.0",
-        "symfony/thanks": "^1.0"
+        "symfony/thanks": "^1.0",
+        "xethron/migrations-generator": "^2.0"
     },
     "autoload": {
         "classmap": [

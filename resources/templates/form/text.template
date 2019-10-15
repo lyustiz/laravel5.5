@@ -1,0 +1,9 @@
+
+<v-flex xs12 >
+    <v-text-field
+        :rules="rules.required"
+        v-model="form.{{columnName}}"
+        label="{{fieldName}}"
+        placeholder="Indique {{fieldName}}"
+    ></v-text-field>
+</v-flex>

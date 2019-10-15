@@ -1,0 +1,13 @@
+
+<v-flex xs12 sm6>
+    <v-select
+    :items="listas.tipoBanco"
+    item-text="nb_tipo_banco"
+    item-value="{{columnName}}"
+    v-model="form.{{columnName}}"
+    :rules="rules.select"
+    label="Tipo Banco"
+    autocomplete
+    required
+    ></v-select>
+</v-flex>
