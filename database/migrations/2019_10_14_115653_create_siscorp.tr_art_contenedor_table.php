@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trArtContenedorTable extends Migration {
+class CreateArtContenedorTable extends Migration {
 
 	/**
 	 * Run the migrations.

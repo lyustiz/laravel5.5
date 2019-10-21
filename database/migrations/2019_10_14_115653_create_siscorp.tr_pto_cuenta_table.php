@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trPtoCuentaTable extends Migration {
+class CreatePtoCuentaTable extends Migration {
 
 	/**
 	 * Run the migrations.

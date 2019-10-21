@@ -5,58 +5,63 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
-                
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_bitacora"
-        label=" bitacora"
-        placeholder="Indique  bitacora"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.co_accion"
-        label=" accion"
-        placeholder="Indique  accion"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_tabla"
-        label=" tabla"
-        placeholder="Indique  tabla"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.in_id_tabla"
-        label=" id tabla"
-        placeholder="Indique  id tabla"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_old_valor"
-        label=" old valor"
-        placeholder="Indique  old valor"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_new_valor"
-        label=" new valor"
-        placeholder="Indique  new valor"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        <v-layout wrap>
+                 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_bitacora"
+                label="Bitacora"
+                placeholder="Indique Bitacora"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.co_accion"
+                label="Accion"
+                placeholder="Indique Accion"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_tabla"
+                label="Tabla"
+                placeholder="Indique Tabla"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.in_id_tabla"
+                label="Id Tabla"
+                placeholder="Indique Id Tabla"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_old_valor"
+                label="Old Valor"
+                placeholder="Indique Old Valor"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_new_valor"
+                label="New Valor"
+                placeholder="Indique New Valor"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_accion"
@@ -79,20 +84,19 @@
                     locale="es"
                     @input="dates.fe_accion = formatDate( form.fe_accion )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_usuario"
-        label=" usuario"
-        placeholder="Indique  usuario"
-    ></v-text-field>
-</v-flex>
-
-            </v-layout>
+        </v-flex>
+ 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                 
+        </v-layout>
 
      </v-form>
 
@@ -122,7 +126,15 @@ export default {
         return{
             tabla: 'tr_bitacora',
             form:{
-                {{tableField}}
+                id_bitacora,
+	 	 	 	co_accion,
+	 	 	 	tx_tabla,
+	 	 	 	in_id_tabla,
+	 	 	 	tx_old_valor,
+	 	 	 	tx_new_valor,
+	 	 	 	fe_accion,
+	 	 	 	id_usuario,
+	 	 	 	
             },
             listas:{
                 //{{foreigTables}}: [{{options}}],

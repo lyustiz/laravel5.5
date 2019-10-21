@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAdministracion.tgSapOpTable extends Migration {
+class CreateSapOpTable extends Migration {
 
 	/**
 	 * Run the migrations.

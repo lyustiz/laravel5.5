@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trSolicitudTable extends Migration {
+class CreateSolicitudTable extends Migration {
 
 	/**
 	 * Run the migrations.

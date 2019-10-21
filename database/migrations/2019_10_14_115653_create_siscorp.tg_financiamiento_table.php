@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgFinanciamientoTable extends Migration {
+class CreateFinanciamientoTable extends Migration {
 
 	/**
 	 * Run the migrations.

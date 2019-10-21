@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trEmpresaSectorTable extends Migration {
+class CreateEmpresaSectorTable extends Migration {
 
 	/**
 	 * Run the migrations.

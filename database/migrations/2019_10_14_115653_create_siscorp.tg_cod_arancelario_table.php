@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgCodArancelarioTable extends Migration {
+class CreateCodArancelarioTable extends Migration {
 
 	/**
 	 * Run the migrations.

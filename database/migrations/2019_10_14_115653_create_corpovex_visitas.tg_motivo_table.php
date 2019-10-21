@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCorpovexVisitas.tgMotivoTable extends Migration {
+class CreateMotivoTable extends Migration {
 
 	/**
 	 * Run the migrations.

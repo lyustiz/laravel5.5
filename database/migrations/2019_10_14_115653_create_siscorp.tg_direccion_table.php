@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgDireccionTable extends Migration {
+class CreateDireccionTable extends Migration {
 
 	/**
 	 * Run the migrations.

@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trFacturaBlTable extends Migration {
+class CreateFacturaBlTable extends Migration {
 
 	/**
 	 * Run the migrations.

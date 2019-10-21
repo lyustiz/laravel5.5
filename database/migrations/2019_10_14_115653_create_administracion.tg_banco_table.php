@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAdministracion.tgBancoTable extends Migration {
+class CreateBancoTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -15,7 +15,7 @@ class CreateAdministracion.tgBancoTable extends Migration {
 		Schema::create('administracion.tg_banco', function(Blueprint $table)
 		{
 			$table->integer('id_banco', true);
-			$table->string('nb_banco')->nullable();
+			$table->string('nb_banco')->unique();
 			$table->string('in_codigo', 5)->nullable();
 			$table->string('tx_siglas', 20)->nullable();
 			$table->string('tx_cod_swift', 11)->nullable();

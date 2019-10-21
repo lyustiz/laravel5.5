@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCorpovexVisitas.trVisitaTable extends Migration {
+class CreateVisitaTable extends Migration {
 
 	/**
 	 * Run the migrations.

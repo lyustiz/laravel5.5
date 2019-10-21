@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.trOfertaProdTable extends Migration {
+class CreateOfertaProdTable extends Migration {
 
 	/**
 	 * Run the migrations.

@@ -5,34 +5,45 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
-                
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_motivo"
-        label=" motivo"
-        placeholder="Indique  motivo"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.nb_motivo"
-        label=" motivo"
-        placeholder="Indique  motivo"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_status"
-        label=" status"
-        placeholder="Indique  status"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        <v-layout wrap>
+                 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_motivo"
+                label="Motivo"
+                placeholder="Indique Motivo"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.nb_motivo"
+                label="Motivo"
+                placeholder="Indique Motivo"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_status"
+                label="Status"
+                placeholder="Indique Status"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_creado"
@@ -55,11 +66,10 @@
                     locale="es"
                     @input="dates.fe_creado = formatDate( form.fe_creado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_actualizado"
@@ -82,20 +92,23 @@
                     locale="es"
                     @input="dates.fe_actualizado = formatDate( form.fe_actualizado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_usuario"
-        label=" usuario"
-        placeholder="Indique  usuario"
-    ></v-text-field>
-</v-flex>
-
-            </v-layout>
+        </v-flex>
+         
+        <v-flex xs12 sm6>
+            <v-select
+            :items="list.tg_usuario"
+            item-text="nb_usuario"
+            item-value="id_usuario"
+            v-model="form.id_usuario"
+            :rules="rules.select"
+            label="Usuario"
+            autocomplete
+            required
+            ></v-select>
+        </v-flex>
+         
+        </v-layout>
 
      </v-form>
 
@@ -125,7 +138,13 @@ export default {
         return{
             tabla: 'tg_motivo',
             form:{
-                {{tableField}}
+                id_motivo,
+	 	 	 	id_usuario,
+	 	 	 	nb_motivo,
+	 	 	 	id_status,
+	 	 	 	fe_creado,
+	 	 	 	fe_actualizado,
+	 	 	 	
             },
             listas:{
                 //{{foreigTables}}: [{{options}}],

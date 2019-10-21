@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgSectorTable extends Migration {
+class CreateSectorTable extends Migration {
 
 	/**
 	 * Run the migrations.

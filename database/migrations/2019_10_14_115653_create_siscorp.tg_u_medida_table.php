@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgUMedidaTable extends Migration {
+class CreateUMedidaTable extends Migration {
 
 	/**
 	 * Run the migrations.

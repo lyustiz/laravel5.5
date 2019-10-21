@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateGestionComunicacional.trVoluntarioTable extends Migration {
+class CreateVoluntarioTable extends Migration {
 
 	/**
 	 * Run the migrations.

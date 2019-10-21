@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgTipoContenedorTable extends Migration {
+class CreateTipoContenedorTable extends Migration {
 
 	/**
 	 * Run the migrations.

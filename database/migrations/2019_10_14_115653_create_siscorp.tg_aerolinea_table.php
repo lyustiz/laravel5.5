@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgAerolineaTable extends Migration {
+class CreateAerolineaTable extends Migration {
 
 	/**
 	 * Run the migrations.

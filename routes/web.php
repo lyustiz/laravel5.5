@@ -12,7 +12,7 @@
 |
 */
 
-Route::get('/', 'CrudGenerate@init')->name('crud');
+Route::get('/', 'CrudGenerate@generate')->name('crud');
 
 
 Auth::routes();

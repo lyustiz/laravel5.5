@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSiscorp.tgPaisTable extends Migration {
+class CreatePaisTable extends Migration {
 
 	/**
 	 * Run the migrations.

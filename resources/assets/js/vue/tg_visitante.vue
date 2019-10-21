@@ -5,82 +5,90 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
-                
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visitante"
-        label=" visitante"
-        placeholder="Indique  visitante"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_nombres"
-        label=" nombres"
-        placeholder="Indique  nombres"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_apellidos"
-        label=" apellidos"
-        placeholder="Indique  apellidos"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.nu_cedula"
-        label=" cedula"
-        placeholder="Indique  cedula"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_nacionalidad"
-        label=" nacionalidad"
-        placeholder="Indique  nacionalidad"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_foto"
-        label=" foto"
-        placeholder="Indique  foto"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_cod_pais"
-        label=" cod pais"
-        placeholder="Indique  cod pais"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_telefono"
-        label=" telefono"
-        placeholder="Indique  telefono"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_status"
-        label=" status"
-        placeholder="Indique  status"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        <v-layout wrap>
+                 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visitante"
+                label="Visitante"
+                placeholder="Indique Visitante"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_nombres"
+                label="Nombres"
+                placeholder="Indique Nombres"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_apellidos"
+                label="Apellidos"
+                placeholder="Indique Apellidos"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.nu_cedula"
+                label="Cedula"
+                placeholder="Indique Cedula"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_nacionalidad"
+                label="Nacionalidad"
+                placeholder="Indique Nacionalidad"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_foto"
+                label="Foto"
+                placeholder="Indique Foto"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_cod_pais"
+                label="Cod Pais"
+                placeholder="Indique Cod Pais"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_telefono"
+                label="Telefono"
+                placeholder="Indique Telefono"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_status"
+                label="Status"
+                placeholder="Indique Status"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_creado"
@@ -103,11 +111,10 @@
                     locale="es"
                     @input="dates.fe_creado = formatDate( form.fe_creado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_actualizado"
@@ -130,20 +137,19 @@
                     locale="es"
                     @input="dates.fe_actualizado = formatDate( form.fe_actualizado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_usuario"
-        label=" usuario"
-        placeholder="Indique  usuario"
-    ></v-text-field>
-</v-flex>
-
-            </v-layout>
+        </v-flex>
+ 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                 
+        </v-layout>
 
      </v-form>
 
@@ -173,7 +179,19 @@ export default {
         return{
             tabla: 'tg_visitante',
             form:{
-                {{tableField}}
+                id_visitante,
+	 	 	 	tx_nombres,
+	 	 	 	tx_apellidos,
+	 	 	 	nu_cedula,
+	 	 	 	tx_nacionalidad,
+	 	 	 	tx_foto,
+	 	 	 	tx_cod_pais,
+	 	 	 	tx_telefono,
+	 	 	 	id_status,
+	 	 	 	fe_creado,
+	 	 	 	fe_actualizado,
+	 	 	 	id_usuario,
+	 	 	 	
             },
             listas:{
                 //{{foreigTables}}: [{{options}}],

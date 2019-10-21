@@ -1,5 +1,5 @@
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.{{columnName}}"
@@ -22,6 +22,5 @@
                     locale="es"
                     @input="dates.{{columnName}} = formatDate( form.{{columnName}} )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>

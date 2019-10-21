@@ -5,66 +5,72 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
-                
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visitante_alerta"
-        label=" visitante alerta"
-        placeholder="Indique  visitante alerta"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visitante"
-        label=" visitante"
-        placeholder="Indique  visitante"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_tipo_alerta"
-        label=" tipo alerta"
-        placeholder="Indique  tipo alerta"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visita"
-        label=" visita"
-        placeholder="Indique  visita"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_motivo_alerta"
-        label=" motivo alerta"
-        placeholder="Indique  motivo alerta"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_anulacion"
-        label=" anulacion"
-        placeholder="Indique  anulacion"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_status"
-        label=" status"
-        placeholder="Indique  status"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        <v-layout wrap>
+                 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visitante_alerta"
+                label="Visitante Alerta"
+                placeholder="Indique Visitante Alerta"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visitante"
+                label="Visitante"
+                placeholder="Indique Visitante"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_tipo_alerta"
+                label="Tipo Alerta"
+                placeholder="Indique Tipo Alerta"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visita"
+                label="Visita"
+                placeholder="Indique Visita"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_motivo_alerta"
+                label="Motivo Alerta"
+                placeholder="Indique Motivo Alerta"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_anulacion"
+                label="Anulacion"
+                placeholder="Indique Anulacion"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_status"
+                label="Status"
+                placeholder="Indique Status"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_creado"
@@ -87,11 +93,10 @@
                     locale="es"
                     @input="dates.fe_creado = formatDate( form.fe_creado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_actualizado"
@@ -114,20 +119,19 @@
                     locale="es"
                     @input="dates.fe_actualizado = formatDate( form.fe_actualizado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_usuario"
-        label=" usuario"
-        placeholder="Indique  usuario"
-    ></v-text-field>
-</v-flex>
-
-            </v-layout>
+        </v-flex>
+ 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                 
+        </v-layout>
 
      </v-form>
 
@@ -157,7 +161,17 @@ export default {
         return{
             tabla: 'tr_visitante_alerta',
             form:{
-                {{tableField}}
+                id_visitante_alerta,
+	 	 	 	id_visitante,
+	 	 	 	id_tipo_alerta,
+	 	 	 	id_visita,
+	 	 	 	tx_motivo_alerta,
+	 	 	 	tx_anulacion,
+	 	 	 	id_status,
+	 	 	 	fe_creado,
+	 	 	 	fe_actualizado,
+	 	 	 	id_usuario,
+	 	 	 	
             },
             listas:{
                 //{{foreigTables}}: [{{options}}],

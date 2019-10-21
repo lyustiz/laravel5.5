@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRpCorpovex.tgEmpresaTable extends Migration {
+class CreateEmpresaTable extends Migration {
 
 	/**
 	 * Run the migrations.

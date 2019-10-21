@@ -5,11 +5,9 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
+        <v-layout wrap>
                 {{formFields}}
-
-            </v-layout>
+        </v-layout>
 
      </v-form>
 

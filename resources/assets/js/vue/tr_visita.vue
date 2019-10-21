@@ -5,82 +5,90 @@
 
         <v-form ref="form" v-model="valido" lazy-validation>
 
-            <v-layout wrap>
-
-                
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visita"
-        label=" visita"
-        placeholder="Indique  visita"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_visitante"
-        label=" visitante"
-        placeholder="Indique  visitante"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_ced_empleado"
-        label=" ced empleado"
-        placeholder="Indique  ced empleado"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_empresa"
-        label=" empresa"
-        placeholder="Indique  empresa"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_tipo_visitante"
-        label=" tipo visitante"
-        placeholder="Indique  tipo visitante"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_cargo"
-        label=" cargo"
-        placeholder="Indique  cargo"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_motivo"
-        label=" motivo"
-        placeholder="Indique  motivo"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.tx_observaciones"
-        label=" observaciones"
-        placeholder="Indique  observaciones"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.nu_carnet"
-        label=" carnet"
-        placeholder="Indique  carnet"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        <v-layout wrap>
+                 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visita"
+                label="Visita"
+                placeholder="Indique Visita"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_visitante"
+                label="Visitante"
+                placeholder="Indique Visitante"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_ced_empleado"
+                label="Ced Empleado"
+                placeholder="Indique Ced Empleado"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_empresa"
+                label="Empresa"
+                placeholder="Indique Empresa"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_tipo_visitante"
+                label="Tipo Visitante"
+                placeholder="Indique Tipo Visitante"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_cargo"
+                label="Cargo"
+                placeholder="Indique Cargo"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_motivo"
+                label="Motivo"
+                placeholder="Indique Motivo"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.tx_observaciones"
+                label="Observaciones"
+                placeholder="Indique Observaciones"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.nu_carnet"
+                label="Carnet"
+                placeholder="Indique Carnet"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_entrada"
@@ -103,11 +111,10 @@
                     locale="es"
                     @input="dates.fe_entrada = formatDate( form.fe_entrada )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_salida"
@@ -130,19 +137,19 @@
                     locale="es"
                     @input="dates.fe_salida = formatDate( form.fe_salida )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_status"
-        label=" status"
-        placeholder="Indique  status"
-    ></v-text-field>
-</v-flex>
-<v-flex xs12 sm3>
+        </v-flex>
+ 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_status"
+                label="Status"
+                placeholder="Indique Status"
+            ></v-text-field>
+        </v-flex>
+                 
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_creado"
@@ -165,11 +172,10 @@
                     locale="es"
                     @input="dates.fe_creado = formatDate( form.fe_creado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
+        </v-flex>
 
-<v-flex xs12 sm3>
+        <v-flex xs12 sm3>
             <v-menu
                 ref="picker"
                 v-model="picker.fe_actualizado"
@@ -192,20 +198,32 @@
                     locale="es"
                     @input="dates.fe_actualizado = formatDate( form.fe_actualizado )"
                 ></v-date-picker>
-
             </v-menu>
-</v-flex>
-
-<v-flex xs12 >
-    <v-text-field
-        :rules="rules.required"
-        v-model="form.id_usuario"
-        label=" usuario"
-        placeholder="Indique  usuario"
-    ></v-text-field>
-</v-flex>
-
-            </v-layout>
+        </v-flex>
+ 
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                          
+        <v-flex xs12 sm6>
+            <v-select
+            :items="list.tg_visitante"
+            item-text="nb_visitante"
+            item-value="id_visitante"
+            v-model="form.id_visitante"
+            :rules="rules.select"
+            label="Visitante"
+            autocomplete
+            required
+            ></v-select>
+        </v-flex>
+         
+        </v-layout>
 
      </v-form>
 
@@ -235,7 +253,22 @@ export default {
         return{
             tabla: 'tr_visita',
             form:{
-                {{tableField}}
+                id_visita,
+	 	 	 	id_visitante,
+	 	 	 	id_ced_empleado,
+	 	 	 	id_empresa,
+	 	 	 	id_tipo_visitante,
+	 	 	 	tx_cargo,
+	 	 	 	id_motivo,
+	 	 	 	tx_observaciones,
+	 	 	 	nu_carnet,
+	 	 	 	fe_entrada,
+	 	 	 	fe_salida,
+	 	 	 	id_status,
+	 	 	 	fe_creado,
+	 	 	 	fe_actualizado,
+	 	 	 	id_usuario,
+	 	 	 	
             },
             listas:{
                 //{{foreigTables}}: [{{options}}],
