@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TrVisita;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class TrVisitaController extends Controller
 {
@@ -15,10 +14,10 @@ class TrVisitaController extends Controller
      */
     public function index()
     {
-            $trVisita = TrVisita::with([TgVisitante])
-                        ->get();
+        $trVisita = TrVisita::with(['TgVisitante'])
+                    ->get();
         
-    return $trVisita;
+        return $trVisita;
     }
 
     /**
@@ -40,25 +39,25 @@ class TrVisitaController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-'id_visitante'	 => 	'required|integer|max:10',
-				'id_ced_empleado'	 => 	'required|integer|max:10',
-				'id_empresa'	 => 	'required|integer|max:10',
-				'id_tipo_visitante'	 => 	'required|integer|max:10',
-				'tx_cargo'	 => 	'required|alpha_num|max:',
-				'id_motivo'	 => 	'required|integer|max:10',
-				'tx_observaciones'	 => 	'required|alpha_num|max:2000',
-				'nu_carnet'	 => 	'required|numeric|max:5',
-				'fe_entrada'	 => 	'required|date',
-				'fe_salida'	 => 	'required|date',
-				'id_status'	 => 	'required|integer|max:10',
-				'fe_creado'	 => 	'required|date',
-				'fe_actualizado'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'id_visitante'      => 	'required|integer|max:10',
+				'id_ced_empleado'   => 	'required|integer|max:10',
+				'id_empresa'        => 	'required|integer|max:10',
+				'id_tipo_visitante' => 	'required|integer|max:10',
+				'tx_cargo'          => 	'required|alpha_num|max:',
+				'id_motivo'         => 	'required|integer|max:10',
+				'tx_observaciones'  => 	'required|alpha_num|max:2000',
+				'nu_carnet'         => 	'required|numeric|max:5',
+				'fe_entrada'        => 	'required|date',
+				'fe_salida'         => 	'required|date',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$trVisita = trVisita::create($request->all());
+        $trVisita = trVisita::create($request->all());
 
-return [ 'msj' => 'Registro Agregado Correctamente', compact('trVisita') ];
+        return [ 'msj' => 'Registro Agregado Correctamente', compact('trVisita') ];
     }
 
     /**
@@ -93,26 +92,26 @@ return [ 'msj' => 'Registro Agregado Correctamente', compact('trVisita') ];
     public function update(Request $request, TrVisita $trVisita)
     {
         $validate = request()->validate([
-'id_visita'	 => 	'required|integer|max:10',
-				'id_visitante'	 => 	'required|integer|max:10',
-				'id_ced_empleado'	 => 	'required|integer|max:10',
-				'id_empresa'	 => 	'required|integer|max:10',
-				'id_tipo_visitante'	 => 	'required|integer|max:10',
-				'tx_cargo'	 => 	'required|alpha_num|max:',
-				'id_motivo'	 => 	'required|integer|max:10',
-				'tx_observaciones'	 => 	'required|alpha_num|max:2000',
-				'nu_carnet'	 => 	'required|numeric|max:5',
-				'fe_entrada'	 => 	'required|date',
-				'fe_salida'	 => 	'required|date',
-				'id_status'	 => 	'required|integer|max:10',
-				'fe_creado'	 => 	'required|date',
-				'fe_actualizado'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'id_visita'         => 	'required|integer|max:10',
+				'id_visitante'      => 	'required|integer|max:10',
+				'id_ced_empleado'   => 	'required|integer|max:10',
+				'id_empresa'        => 	'required|integer|max:10',
+				'id_tipo_visitante' => 	'required|integer|max:10',
+				'tx_cargo'          => 	'required|alpha_num|max:',
+				'id_motivo'         => 	'required|integer|max:10',
+				'tx_observaciones'  => 	'required|alpha_num|max:2000',
+				'nu_carnet'         => 	'required|numeric|max:5',
+				'fe_entrada'        => 	'required|date',
+				'fe_salida'         => 	'required|date',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$trVisita = $trVisita->update($request->all());
+        $trVisita = $trVisita->update($request->all());
 
-return [ 'msj' => 'Registro Editado' , compact('trVisita')];
+        return [ 'msj' => 'Registro Editado' , compact('trVisita')];
     }
 
     /**
@@ -125,6 +124,6 @@ return [ 'msj' => 'Registro Editado' , compact('trVisita')];
     {
         $trVisita = $trVisita->delete();
  
-return [ 'msj' => 'Registro Eliminado' , compact('trVisita')];
+        return [ 'msj' => 'Registro Eliminado' , compact('trVisita')];
     }
 }

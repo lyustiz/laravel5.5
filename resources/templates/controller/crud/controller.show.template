@@ -1,1 +1,1 @@
-return {{modelInstance}};
+return ${{modelInstance}};

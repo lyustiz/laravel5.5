@@ -1,7 +1,7 @@
 $validate = request()->validate([
-{{validateFields}}
-]);
+                {{validateFields}}
+        ]);
 
-${{modelInstance}} = ${{modelInstance}}->update($request->all());
+        ${{modelInstance}} = ${{modelInstance}}->update($request->all());
 
-return [ 'msj' => 'Registro Editado' , compact('{{modelInstance}}')];
+        return [ 'msj' => 'Registro Editado' , compact('{{modelInstance}}')];

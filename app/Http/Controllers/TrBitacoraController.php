@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TrBitacora;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class TrBitacoraController extends Controller
 {
@@ -15,10 +14,10 @@ class TrBitacoraController extends Controller
      */
     public function index()
     {
-            $trBitacora = TrBitacora::with([])
-                        ->get();
+        $trBitacora = TrBitacora::with([])
+                    ->get();
         
-    return $trBitacora;
+        return $trBitacora;
     }
 
     /**
@@ -40,18 +39,18 @@ class TrBitacoraController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-'co_accion'	 => 	'required|alpha_num|max:3',
-				'tx_tabla'	 => 	'required|alpha_num|max:255',
-				'in_id_tabla'	 => 	'required|integer|max:10',
-				'tx_old_valor'	 => 	'required|alpha_num|max:4000',
-				'tx_new_valor'	 => 	'required|alpha_num|max:4000',
-				'fe_accion'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'co_accion'         => 	'required|alpha_num|max:3',
+				'tx_tabla'          => 	'required|alpha_num|max:255',
+				'in_id_tabla'       => 	'required|integer|max:10',
+				'tx_old_valor'      => 	'required|alpha_num|max:4000',
+				'tx_new_valor'      => 	'required|alpha_num|max:4000',
+				'fe_accion'         => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$trBitacora = trBitacora::create($request->all());
+        $trBitacora = trBitacora::create($request->all());
 
-return [ 'msj' => 'Registro Agregado Correctamente', compact('trBitacora') ];
+        return [ 'msj' => 'Registro Agregado Correctamente', compact('trBitacora') ];
     }
 
     /**
@@ -86,19 +85,19 @@ return [ 'msj' => 'Registro Agregado Correctamente', compact('trBitacora') ];
     public function update(Request $request, TrBitacora $trBitacora)
     {
         $validate = request()->validate([
-'id_bitacora'	 => 	'required|integer|max:10',
-				'co_accion'	 => 	'required|alpha_num|max:3',
-				'tx_tabla'	 => 	'required|alpha_num|max:255',
-				'in_id_tabla'	 => 	'required|integer|max:10',
-				'tx_old_valor'	 => 	'required|alpha_num|max:4000',
-				'tx_new_valor'	 => 	'required|alpha_num|max:4000',
-				'fe_accion'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'id_bitacora'       => 	'required|integer|max:10',
+				'co_accion'         => 	'required|alpha_num|max:3',
+				'tx_tabla'          => 	'required|alpha_num|max:255',
+				'in_id_tabla'       => 	'required|integer|max:10',
+				'tx_old_valor'      => 	'required|alpha_num|max:4000',
+				'tx_new_valor'      => 	'required|alpha_num|max:4000',
+				'fe_accion'         => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$trBitacora = $trBitacora->update($request->all());
+        $trBitacora = $trBitacora->update($request->all());
 
-return [ 'msj' => 'Registro Editado' , compact('trBitacora')];
+        return [ 'msj' => 'Registro Editado' , compact('trBitacora')];
     }
 
     /**
@@ -111,6 +110,6 @@ return [ 'msj' => 'Registro Editado' , compact('trBitacora')];
     {
         $trBitacora = $trBitacora->delete();
  
-return [ 'msj' => 'Registro Eliminado' , compact('trBitacora')];
+        return [ 'msj' => 'Registro Eliminado' , compact('trBitacora')];
     }
 }

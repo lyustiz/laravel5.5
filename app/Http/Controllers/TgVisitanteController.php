@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TgVisitante;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class TgVisitanteController extends Controller
 {
@@ -15,10 +14,10 @@ class TgVisitanteController extends Controller
      */
     public function index()
     {
-            $tgVisitante = TgVisitante::with([])
-                        ->get();
+        $tgVisitante = TgVisitante::with([])
+                    ->get();
         
-    return $tgVisitante;
+        return $tgVisitante;
     }
 
     /**
@@ -40,22 +39,22 @@ class TgVisitanteController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-'tx_nombres'	 => 	'required|alpha_num|max:50',
-				'tx_apellidos'	 => 	'required|alpha_num|max:50',
-				'nu_cedula'	 => 	'required|alpha_num|max:10',
-				'tx_nacionalidad'	 => 	'required|alpha_num|max:1',
-				'tx_foto'	 => 	'required|alpha_num|max:255',
-				'tx_cod_pais'	 => 	'required|alpha_num|max:',
-				'tx_telefono'	 => 	'required|alpha_num|max:20',
-				'id_status'	 => 	'required|integer|max:10',
-				'fe_creado'	 => 	'required|date',
-				'fe_actualizado'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'tx_nombres'        => 	'required|alpha_num|max:50',
+				'tx_apellidos'      => 	'required|alpha_num|max:50',
+				'nu_cedula'         => 	'required|alpha_num|max:10',
+				'tx_nacionalidad'   => 	'required|alpha_num|max:1',
+				'tx_foto'           => 	'required|alpha_num|max:255',
+				'tx_cod_pais'       => 	'required|alpha_num|max:',
+				'tx_telefono'       => 	'required|alpha_num|max:20',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$tgVisitante = tgVisitante::create($request->all());
+        $tgVisitante = tgVisitante::create($request->all());
 
-return [ 'msj' => 'Registro Agregado Correctamente', compact('tgVisitante') ];
+        return [ 'msj' => 'Registro Agregado Correctamente', compact('tgVisitante') ];
     }
 
     /**
@@ -90,23 +89,23 @@ return [ 'msj' => 'Registro Agregado Correctamente', compact('tgVisitante') ];
     public function update(Request $request, TgVisitante $tgVisitante)
     {
         $validate = request()->validate([
-'id_visitante'	 => 	'required|integer|max:10',
-				'tx_nombres'	 => 	'required|alpha_num|max:50',
-				'tx_apellidos'	 => 	'required|alpha_num|max:50',
-				'nu_cedula'	 => 	'required|alpha_num|max:10',
-				'tx_nacionalidad'	 => 	'required|alpha_num|max:1',
-				'tx_foto'	 => 	'required|alpha_num|max:255',
-				'tx_cod_pais'	 => 	'required|alpha_num|max:',
-				'tx_telefono'	 => 	'required|alpha_num|max:20',
-				'id_status'	 => 	'required|integer|max:10',
-				'fe_creado'	 => 	'required|date',
-				'fe_actualizado'	 => 	'required|date',
-				'id_usuario'	 => 	'required|integer|max:10',
-]);
+                'id_visitante'      => 	'required|integer|max:10',
+				'tx_nombres'        => 	'required|alpha_num|max:50',
+				'tx_apellidos'      => 	'required|alpha_num|max:50',
+				'nu_cedula'         => 	'required|alpha_num|max:10',
+				'tx_nacionalidad'   => 	'required|alpha_num|max:1',
+				'tx_foto'           => 	'required|alpha_num|max:255',
+				'tx_cod_pais'       => 	'required|alpha_num|max:',
+				'tx_telefono'       => 	'required|alpha_num|max:20',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$tgVisitante = $tgVisitante->update($request->all());
+        $tgVisitante = $tgVisitante->update($request->all());
 
-return [ 'msj' => 'Registro Editado' , compact('tgVisitante')];
+        return [ 'msj' => 'Registro Editado' , compact('tgVisitante')];
     }
 
     /**
@@ -119,6 +118,6 @@ return [ 'msj' => 'Registro Editado' , compact('tgVisitante')];
     {
         $tgVisitante = $tgVisitante->delete();
  
-return [ 'msj' => 'Registro Eliminado' , compact('tgVisitante')];
+        return [ 'msj' => 'Registro Eliminado' , compact('tgVisitante')];
     }
 }

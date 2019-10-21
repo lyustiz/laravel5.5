@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TgMotivo;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class TgMotivoController extends Controller
 {
@@ -15,10 +14,10 @@ class TgMotivoController extends Controller
      */
     public function index()
     {
-            $tgMotivo = TgMotivo::with([TgUsuario])
-                        ->get();
+        $tgMotivo = TgMotivo::with([])
+                    ->get();
         
-    return $tgMotivo;
+        return $tgMotivo;
     }
 
     /**
@@ -40,16 +39,16 @@ class TgMotivoController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-'id_usuario'	 => 	'required|integer|max:10',
-'nb_motivo'	 => 	'required|alpha_num|max:255',
-'id_status'	 => 	'required|integer|max:10',
-'fe_creado'	 => 	'required|date',
-'fe_actualizado'	 => 	'required|date',
-]);
+                'nb_motivo'         => 	'required|alpha_num|max:255',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$tgMotivo = tgMotivo::create($request->all());
+        $tgMotivo = tgMotivo::create($request->all());
 
-return [ 'msj' => 'Registro Agregado Correctamente', compact('tgMotivo') ];
+        return [ 'msj' => 'Registro Agregado Correctamente', compact('tgMotivo') ];
     }
 
     /**
@@ -84,17 +83,17 @@ return [ 'msj' => 'Registro Agregado Correctamente', compact('tgMotivo') ];
     public function update(Request $request, TgMotivo $tgMotivo)
     {
         $validate = request()->validate([
-                'id_motivo'	      => 'required|integer|max:10',
-				'id_usuario'      => 'required|integer|max:10',
-				'nb_motivo'	      => 'required|alpha_num|max:255',
-				'id_status'	      => 'required|integer|max:10',
-				'fe_creado'	      => 'required|date',
-				'fe_actualizado'  => 'required|date',
-]);
+                'id_motivo'         => 	'required|integer|max:10',
+				'nb_motivo'         => 	'required|alpha_num|max:255',
+				'id_status'         => 	'required|integer|max:10',
+				'fe_creado'         => 	'required|date',
+				'fe_actualizado'    => 	'required|date',
+				'id_usuario'        => 	'required|integer|max:10',
+        ]);
 
-$tgMotivo = $tgMotivo->update($request->all());
+        $tgMotivo = $tgMotivo->update($request->all());
 
-return [ 'msj' => 'Registro Editado' , compact('tgMotivo')];
+        return [ 'msj' => 'Registro Editado' , compact('tgMotivo')];
     }
 
     /**
@@ -107,6 +106,6 @@ return [ 'msj' => 'Registro Editado' , compact('tgMotivo')];
     {
         $tgMotivo = $tgMotivo->delete();
  
-return [ 'msj' => 'Registro Eliminado' , compact('tgMotivo')];
+        return [ 'msj' => 'Registro Eliminado' , compact('tgMotivo')];
     }
 }

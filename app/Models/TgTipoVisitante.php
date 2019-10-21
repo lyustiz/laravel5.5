@@ -24,8 +24,5 @@ class TgTipoVisitante extends Pivot
 	 	 	 	 	 	 	'fe_actualizado'
                             ];
 
-    public function tgUsuario()
-    {
-        return $this->HasMany('App\Models\TgUsuario', 'id_usuario');
-    } 
+
 }

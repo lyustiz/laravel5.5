@@ -32,15 +32,12 @@ class CrudGenerate extends Controller
     {
         $this->schema = $schema;
 
-        $this->setConection($conection);
+        $this->setConnection($conection);
 
         $this->setMetadata();
 
         $this->setTables();
-
     }
-
-    
 
     public function generate()
     {
@@ -153,9 +150,7 @@ class CrudGenerate extends Controller
             app_path('Http/Controllers/'.Str::studly($modelName).'Controller.php'),
             $ControllerCompiled
         );
-        
     }
-
 
     public function foreingnsTables($foreingnKeys)
     {
@@ -165,12 +160,12 @@ class CrudGenerate extends Controller
         {
             foreach ($foreingnKeys as $foreingnKey) 
             {
-                $foreignTable[]  = Str::studly(
-                                        $this->getTableName( $foreingnKey->getForeignTableName() )
+                $foreignTable[]  =  Str::studly(
+                                    $this->getTableName( $foreingnKey->getForeignTableName() )
                                     );
             }
         }
-        return ($foreignTable == null ) ? null : implode(', ', $foreignTable);
+        return ($foreignTable == null ) ? null : "'".implode("', ", $foreignTable)."'";
     }
 
     public function getValidateFields($crudAction, $columns, $primaryKey)
@@ -223,9 +218,12 @@ class CrudGenerate extends Controller
                     break;
             }
 
-            $validateFields[] = "'" . $columnsAttributes['name'] . "'" . "\t => \t" . 
-                                "'" . implode("|",$validators) . "'" . "," ;
+            $colSpace  = ((18 - strlen($columnsAttributes['name'])) < 0) ? 0 : 18 - strlen($columnsAttributes['name']);
+            
+            $rowSpaces = str_repeat(' ', $colSpace ) ."=> \t";
 
+            $validateFields[] = "'" . $columnsAttributes['name'] . "'" . $rowSpaces . 
+                                "'" . implode("|",$validators) . "'" . "," ;
         }
         
         return  implode( PHP_EOL ."\t\t\t\t" , $validateFields );
@@ -344,7 +342,7 @@ class CrudGenerate extends Controller
         $this->fileSave($tableName, $tableColumns, $Formfields);
     }
 
-    public function setConection($connectionName)
+    public function setConnection($connectionName)
     {
         $this->connection = \DB::connection($connectionName);
     }
