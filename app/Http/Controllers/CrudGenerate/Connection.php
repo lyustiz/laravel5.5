@@ -17,13 +17,13 @@ class Connection
     {
         $this->schema = $schemaName;
 
-        $this->setConnection($database);
-
+        return $this->setConnection($database);
     }
 
     public function setConnection($connectionName)
     {
-        $this->connection = \DB::connection($connectionName);
+        return $this->connection = \DB::connection($connectionName);
+
     }
 
     public function getSchema()

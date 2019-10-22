@@ -17,5 +17,11 @@ return [
         'models'    => 'Models/',
         'views'     => 'resources/assets/js/vue/',
         'templates' => 'resources/templates/'
+    ],
+
+    'cols' => [
+        'createdAt' => 'fe_creado',
+        'updatedAt' => 'fe_actualizado',
+        'hiddenCols'=> ['id_usuario' , 'fe_creado', 'fe_actualizado']
     ]
 ];

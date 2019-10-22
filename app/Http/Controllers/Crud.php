@@ -7,19 +7,26 @@ use App\Http\Controllers\CrudGenerate\CrudGenerate;
 
 class Crud extends Controller
 {
-    public $crudGenerate;
+    public $crud;
 
     public function __construct(CrudGenerate $crudGenerate)
     {
-        $this->crudGenerate = $crudGenerate;
-
-        
+        $this->crud = $crudGenerate;
     }
     
     public function generate()
     {
-        dd($this->crudGenerate);
-       // $conection->connect();
-    
+        $databases = $this->crud->getDatabases();
+        
+        $schemas = $this->crud->getSchemas();
+
+        $schema = 'corpovex_visitas';
+
+        $tables = $this->crud->setSchema($schema)->getTableMetadata();
+        
+        $this->crud->generate();
+
+        //$object = json_decode(json_encode($array), FALSE);
+
     }
 }

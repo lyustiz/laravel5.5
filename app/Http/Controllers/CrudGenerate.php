@@ -37,6 +37,14 @@ class CrudGenerate extends Controller
         $this->setMetadata();
 
         $this->setTables();
+
+        $this->modelPath = 'Models/';
+
+        $this->createdAt = 'fe_creado';
+
+        $this->updatedAt = 'fe_actualizado';
+
+        $this->hiddenCols = [ 'id_usuario', $this->createdAt, $this->updatedAt ];
     }
 
     public function generate()
@@ -66,14 +74,7 @@ class CrudGenerate extends Controller
     //MODEL
     public function modelGenerate( $table, $columns, $foreingnKeys )
     {
-        $this->modelPath = 'Models/';
-
-        $this->createdAt = 'fe_creado';
-
-        $this->updatedAt = 'fe_actualizado';
-
-        $this->hiddenCols = [ 'id_usuario', $this->createdAt, $this->updatedAt ];
-
+       
         $tableName = $this->getTableName( $table->getName() );
 
         $force     = true;
