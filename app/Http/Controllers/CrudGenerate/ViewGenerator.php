@@ -8,14 +8,15 @@ class ViewGenerator
 {
     public $tables;
 
+    public $foreignTables;
+
     //CONFIG
 
-    private $controllerPath;
+    private $viewPath;
 
     private $templatePath;
 
     private $hiddenCols;
-
 
     public function __construct($tables)
     {
@@ -32,7 +33,7 @@ class ViewGenerator
 
         $cols  = $conf['cols'];
 
-        $this->controllerPath = $paths['views'];
+        $this->viewPath       = $paths['views'];
 
         $this->templatePath   = $paths['templates'] . 'view/';
 
@@ -60,10 +61,101 @@ class ViewGenerator
             $tableColumns[]   = $columnName;
         }
 
-        $formFields  .= $this->foreingKeyField($table->foreignKeys);
+        $formFields  .= $this->selectFields($table->foreignKeys);
 
         return $formFields;
     }
+
+    public function compile($definition, $tableName, $table)
+    {
+        $this->createDirectory();
+
+        //list
+        return file_put_contents(
+            base_path( $this->viewPath .'list/'. $tableName . ".vue"),
+            $this->compileList($definition, $tableName, $table)
+        );
+        //form
+        return file_put_contents(
+            base_path( $this->viewPath .'form/'. $tableName . ".vue"),
+            $this->compileForm($definition, $tableName, $table)
+        );
+    }
+
+    protected function compileList($definition, $tableName, $table)
+    {
+        $headers     = $this->compileHeaders($tableName, $table);
+        
+        $listColumns = $this->compileListColumns($tableName, $table);
+
+        $formName    = Str::studly($tableName) . '_form';
+       
+        return str_replace(
+            ['{{primaryKey}}', '{{className}}', '{{instanceName}}', '{{formName}}', '{{headers}}', '{{listColumns}}',],
+            [$table->primaryKey, $table->className, $table->instanceName, $formName, $headers, $listColumns ],
+            file_get_contents(base_path( $this->templatePath . "/form.template" ))
+        );
+    }
+    
+    protected function compileForm($definition, $tableName, $table)
+    {
+        $tableColumns = $this->formatTableColumns($table->columns);
+
+        $foreignTables = $this->formatForeingTables(); 
+       
+        return str_replace(
+            ['{{table}}', '{{tableField}}', '{{formFields}}', '{{foreignTables}}'],
+            [$tableName,  $tableColumns, $definition, $foreignTables],
+            file_get_contents(base_path( $this->templatePath . "/form.template" ))
+        );
+    }
+
+    //list
+    public function compileHeaders($tableName, $table)
+    {
+        $headers = [];
+
+        foreach ($table->columns as $columnName => $column) 
+        {
+            $headers[$tableName] = $this->defineHeaders($columnName);
+        }
+
+        return implode(  PHP_EOL ."\t\t\t'" , $headers );
+    }
+
+    public function compileListColumns($tableName, $table)
+    {
+        $listColumns = [];
+
+        foreach ($table->columns as $columnName => $column) 
+        {
+            $listColumns[$tableName] = $this->defineHeaders($columnName);
+        }
+
+        return implode(  PHP_EOL ."\t\t\t\t\t'" , $listColumns );
+    }
+
+    public function defineHeaders($columnName)
+    {
+        $headerName = $this->fieldName($columnName);
+
+        return str_replace(
+            [ '{{headerName}}', '{{columnName}}' ],
+            [ $headerName,  $columnName ],
+            file_get_contents(base_path( $this->templatePath . "/list/header.template" ))
+        );
+    } 
+
+    public function defineListColumns($columnName)
+    {
+        return str_replace(
+            [ '{{columnName}}' ],
+            [ $columnName ],
+            file_get_contents(base_path( $this->templatePath . "/list/column.template" ))
+        );
+    } 
+
+    //forms
 
     public function fieldTemplates($columnName, $column)
     {
@@ -80,19 +172,19 @@ class ViewGenerator
             case $column->type == 'datetime':
 
                 return $this->fieldTemplate('date', $columnName, $fieldName);
-      
+    
             case $column->type == 'integer':
 
                 return $this->fieldTemplate('text', $columnName, $fieldName);
-           
+        
             case $column->type == 'decimal':
 
                 return $this->fieldTemplate('text', $columnName, $fieldName);
 
             case $column->type == 'boolean':
 
-                return $this->fieldTemplate('ceckbox', $columnName, $fieldName);
-                          
+                return $this->fieldTemplate('checkbox', $columnName, $fieldName);
+            
             default:
 
                 return $this->fieldTemplate('text', $columnName, $fieldName);
@@ -110,6 +202,55 @@ class ViewGenerator
         );
     }
 
+    public function selectFields($foreingnKeys)
+    {
+        $selectFields = null;
+
+        if($foreingnKeys != [])
+        {
+            foreach ($foreingnKeys as $foreingnKey) {
+
+                $selectFields .=    $this->fieldTemplate(
+                                        'select', 
+                                        $foreingnKey->localColumn,
+                                        $this->fieldName($foreingnKey->localColumn),
+                                        Str::camel($foreingnKey->foreignTable),
+                                        $foreingnKey->foreignColumn
+                                    );
+
+                $this->foreignTables[] = Str::camel($foreingnKey->foreignTable);
+            }
+        }
+        return $selectFields;
+    }
+
+    public function formatTableColumns($columns)
+    {
+        $formColumns = null;
+
+        foreach ($columns as $columnName => $column) 
+        {
+            $formColumns .= $columnName . ','. PHP_EOL ."\t \t \t \t";
+        }
+
+        return $formColumns;
+    }
+
+    public function formatForeingTables()
+    {
+        $formatTable = [];
+
+        if($this->foreignTables != [])
+        {
+            foreach ($this->foreignTables as $foreignTable) {
+                $formatTable[] = Str::camel($foreignTable) . ": \t [],";
+            }
+        }
+
+        return implode(  PHP_EOL ."\t \t \t \t \t \t \t'" , $formatTable ) ;
+          
+    }
+
     public function getPrefix($columnName)
     {
         return substr($columnName, 0, 2);
@@ -117,96 +258,21 @@ class ViewGenerator
 
     protected function fieldName($columnName)
     {
-        $fieldName =  str_replace(
-                                $this->getPrefix($columnName) . '_',
-                                null,
-                                $columnName
-                            );
-        
+        $fieldName =  str_replace($this->getPrefix($columnName) . '_', null, $columnName);
+       
         return ucwords(str_replace('_', ' ', $fieldName));
     }
 
-    public function foreingKeyField($foreingnKeys)
-    {
-        $foreingKeyField = null;
-
-        if($foreingnKeys!=[])
-        {
-            foreach ($foreingnKeys as $foreingnKey) {
-
-                $foreingKeyField .=  $this->fieldTemplate(
-                                        'select', 
-                                        $foreingnKey->localColumn,
-                                        $this->getFieldName($foreingnKey->localColumn),
-                                        $this->getTableName($foreingnKey->foreignTable),
-                                        $foreingnKey->foreignColumn
-                                    );
-            }
-        }
-        return $foreingKeyField;
-    }
-
-    public function compile($definition, $tableName, $table)
-    {
-        $this->createDirectory();
-
-        return file_put_contents(
-            resource_path("assets/js/vue/$tableName.vue"),
-            $this->compileTemplates($definition, $tableName, $table)
-        );
-    }
-
-    protected function compileTemplates($definition, $tableName, $table)
-    {
-        $tableColumns = $this->formatTableColumns($table->columns);
-       
-        return str_replace(
-            ['{{table}}', '{{tableField}}', '{{formFields}}'],
-            [$tableName,  $tableColumns, $definition],
-            file_get_contents(app_path('../resources/templates/form.template'))
-        );
-    }
-
-    protected function formatTableColumns($columns)
-    {
-       $formColums = null;
-
-        foreach ($columns as $columnName => $column) 
-        {
-            if(in_array($columnName, $this->hiddenCols))
-            {
-                continue;
-            }
-
-            $formColums .= $columnName . ','. PHP_EOL ."\t \t \t \t";
-        }
-       
-        return $formColums;
-    }
-
+    //global
     public function createDirectory()
     {
-        if (! is_dir($directory = resource_path('assets/js/vue/'))) {
+        if (! is_dir($directory = base_path( $this->viewPath . 'list/' ))) {
             mkdir($directory, 0755, true);
         }
-    }
 
-    protected function getFieldName($columnName)
-    {
-        $fieldName =  str_replace(
-                                $this->getPrefix($columnName) . '_',
-                                null,
-                                $columnName
-                            );
-        
-        return ucwords( str_replace( '_', ' ', $fieldName ) );
-    }
-
-    public function getTableName($tableFullName)
-    {
-        return strtolower(
-            substr($tableFullName, strpos($tableFullName, '.') + 1)
-        );
+        if (! is_dir($directory = base_path( $this->viewPath . 'form/' ))) {
+            mkdir($directory, 0755, true);
+        }
     }
 
 }

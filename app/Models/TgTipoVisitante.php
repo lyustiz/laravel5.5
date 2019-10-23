@@ -14,9 +14,9 @@ class TgTipoVisitante extends Pivot
 
     protected $fillable   = [
                             'id_tipo_visitante',
-	 	 	 	 	 	 	'id_usuario',
 	 	 	 	 	 	 	'nb_tipo_visitante',
-	 	 	 	 	 	 	'id_status'
+	 	 	 	 	 	 	'id_status',
+	 	 	 	 	 	 	'id_usuario'
                             ]; 
     
     protected $hidden     = [
@@ -24,8 +24,5 @@ class TgTipoVisitante extends Pivot
 	 	 	 	 	 	 	'fe_actualizado'
                             ];
 
-    public function tgUsuario()
-    {
-        return $this->HasMany('App\Models\TgUsuario', 'id_usuario');
-    } 
+
 }

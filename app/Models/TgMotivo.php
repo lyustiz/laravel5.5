@@ -14,9 +14,9 @@ class TgMotivo extends Pivot
 
     protected $fillable   = [
                             'id_motivo',
-	 	 	 	 	 	 	'id_usuario',
 	 	 	 	 	 	 	'nb_motivo',
-	 	 	 	 	 	 	'id_status'
+	 	 	 	 	 	 	'id_status',
+	 	 	 	 	 	 	'id_usuario'
                             ]; 
     
     protected $hidden     = [
@@ -24,8 +24,5 @@ class TgMotivo extends Pivot
 	 	 	 	 	 	 	'fe_actualizado'
                             ];
 
-    public function tgUsuario()
-    {
-        return $this->HasMany('App\Models\TgUsuario', 'id_usuario');
-    } 
+
 }
