@@ -212,7 +212,7 @@
                           
         <v-flex xs12 sm6>
             <v-select
-            :items="list.tg_visitante"
+            :items="list.g_visitante"
             item-text="nb_visitante"
             item-value="id_visitante"
             v-model="form.id_visitante"
@@ -265,8 +265,6 @@ export default {
 	 	 	 	fe_entrada,
 	 	 	 	fe_salida,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
 	 	 	 	id_usuario,
 	 	 	 	
             },

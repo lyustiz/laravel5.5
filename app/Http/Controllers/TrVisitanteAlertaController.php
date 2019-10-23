@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TrVisitanteAlerta;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TrVisitanteAlertaController extends Controller
 {
@@ -39,15 +40,13 @@ class TrVisitanteAlertaController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-                'id_visitante'      => 	'required|integer|max:10',
-				'id_tipo_alerta'    => 	'required|integer|max:10',
-				'id_visita'         => 	'required|integer|max:10',
-				'tx_motivo_alerta'  => 	'required|alpha_num|max:255',
-				'tx_anulacion'      => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_visitante'      => 	'required|integer|max:10',
+			'id_tipo_alerta'    => 	'required|integer|max:10',
+			'id_visita'         => 	'required|integer|max:10',
+			'tx_motivo_alerta'  => 	'required|alpha_num|max:255',
+			'tx_anulacion'      => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
+			'id_usuario'        => 	'required|integer|max:10',
         ]);
 
         $trVisitanteAlerta = trVisitanteAlerta::create($request->all());
@@ -63,7 +62,7 @@ class TrVisitanteAlertaController extends Controller
      */
     public function show(TrVisitanteAlerta $trVisitanteAlerta)
     {
-        return trVisitanteAlerta;
+        return $trVisitanteAlerta;
     }
 
     /**
@@ -87,16 +86,14 @@ class TrVisitanteAlertaController extends Controller
     public function update(Request $request, TrVisitanteAlerta $trVisitanteAlerta)
     {
         $validate = request()->validate([
-                'id_visitante_alerta'=> 	'required|integer|max:10',
-				'id_visitante'      => 	'required|integer|max:10',
-				'id_tipo_alerta'    => 	'required|integer|max:10',
-				'id_visita'         => 	'required|integer|max:10',
-				'tx_motivo_alerta'  => 	'required|alpha_num|max:255',
-				'tx_anulacion'      => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_visitante_alerta'=> 	'required|integer|max:10',
+			'id_visitante'      => 	'required|integer|max:10',
+			'id_tipo_alerta'    => 	'required|integer|max:10',
+			'id_visita'         => 	'required|integer|max:10',
+			'tx_motivo_alerta'  => 	'required|alpha_num|max:255',
+			'tx_anulacion'      => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
+			'id_usuario'        => 	'required|integer|max:10',
         ]);
 
         $trVisitanteAlerta = $trVisitanteAlerta->update($request->all());

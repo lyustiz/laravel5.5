@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TgTipoVisitante;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TgTipoVisitanteController extends Controller
 {
@@ -14,7 +15,7 @@ class TgTipoVisitanteController extends Controller
      */
     public function index()
     {
-        $tgTipoVisitante = TgTipoVisitante::with([])
+        $tgTipoVisitante = TgTipoVisitante::with(['TgUsuario'])
                     ->get();
         
         return $tgTipoVisitante;
@@ -39,11 +40,9 @@ class TgTipoVisitanteController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-                'nb_tipo_visitante' => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_usuario'        => 	'required|integer|max:10',
+			'nb_tipo_visitante' => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
         ]);
 
         $tgTipoVisitante = tgTipoVisitante::create($request->all());
@@ -59,7 +58,7 @@ class TgTipoVisitanteController extends Controller
      */
     public function show(TgTipoVisitante $tgTipoVisitante)
     {
-        return tgTipoVisitante;
+        return $tgTipoVisitante;
     }
 
     /**
@@ -83,12 +82,10 @@ class TgTipoVisitanteController extends Controller
     public function update(Request $request, TgTipoVisitante $tgTipoVisitante)
     {
         $validate = request()->validate([
-                'id_tipo_visitante' => 	'required|integer|max:10',
-				'nb_tipo_visitante' => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_tipo_visitante' => 	'required|integer|max:10',
+			'id_usuario'        => 	'required|integer|max:10',
+			'nb_tipo_visitante' => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
         ]);
 
         $tgTipoVisitante = $tgTipoVisitante->update($request->all());

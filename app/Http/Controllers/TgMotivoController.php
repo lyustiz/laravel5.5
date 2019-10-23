@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TgMotivo;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TgMotivoController extends Controller
 {
@@ -14,7 +15,7 @@ class TgMotivoController extends Controller
      */
     public function index()
     {
-        $tgMotivo = TgMotivo::with([])
+        $tgMotivo = TgMotivo::with(['TgUsuario'])
                     ->get();
         
         return $tgMotivo;
@@ -39,11 +40,9 @@ class TgMotivoController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-                'nb_motivo'         => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_usuario'        => 	'required|integer|max:10',
+			'nb_motivo'         => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
         ]);
 
         $tgMotivo = tgMotivo::create($request->all());
@@ -59,7 +58,7 @@ class TgMotivoController extends Controller
      */
     public function show(TgMotivo $tgMotivo)
     {
-        return tgMotivo;
+        return $tgMotivo;
     }
 
     /**
@@ -83,12 +82,10 @@ class TgMotivoController extends Controller
     public function update(Request $request, TgMotivo $tgMotivo)
     {
         $validate = request()->validate([
-                'id_motivo'         => 	'required|integer|max:10',
-				'nb_motivo'         => 	'required|alpha_num|max:255',
-				'id_status'         => 	'required|integer|max:10',
-				'fe_creado'         => 	'required|date',
-				'fe_actualizado'    => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_motivo'         => 	'required|integer|max:10',
+			'id_usuario'        => 	'required|integer|max:10',
+			'nb_motivo'         => 	'required|alpha_num|max:255',
+			'id_status'         => 	'required|integer|max:10',
         ]);
 
         $tgMotivo = $tgMotivo->update($request->all());

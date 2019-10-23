@@ -19,6 +19,15 @@
         <v-flex xs12 >
             <v-text-field
                 :rules="rules.required"
+                v-model="form.id_usuario"
+                label="Usuario"
+                placeholder="Indique Usuario"
+            ></v-text-field>
+        </v-flex>
+                  
+        <v-flex xs12 >
+            <v-text-field
+                :rules="rules.required"
                 v-model="form.nb_tipo_visitante"
                 label="Tipo Visitante"
                 placeholder="Indique Tipo Visitante"
@@ -85,16 +94,20 @@
                 ></v-date-picker>
             </v-menu>
         </v-flex>
- 
-        <v-flex xs12 >
-            <v-text-field
-                :rules="rules.required"
-                v-model="form.id_usuario"
-                label="Usuario"
-                placeholder="Indique Usuario"
-            ></v-text-field>
+         
+        <v-flex xs12 sm6>
+            <v-select
+            :items="list.g_usuario"
+            item-text="nb_usuario"
+            item-value="id_usuario"
+            v-model="form.id_usuario"
+            :rules="rules.select"
+            label="Usuario"
+            autocomplete
+            required
+            ></v-select>
         </v-flex>
-                 
+         
         </v-layout>
 
      </v-form>
@@ -126,11 +139,9 @@ export default {
             tabla: 'tg_tipo_visitante',
             form:{
                 id_tipo_visitante,
+	 	 	 	id_usuario,
 	 	 	 	nb_tipo_visitante,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
-	 	 	 	id_usuario,
 	 	 	 	
             },
             listas:{

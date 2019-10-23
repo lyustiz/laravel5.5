@@ -168,8 +168,6 @@ export default {
 	 	 	 	tx_motivo_alerta,
 	 	 	 	tx_anulacion,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
 	 	 	 	id_usuario,
 	 	 	 	
             },

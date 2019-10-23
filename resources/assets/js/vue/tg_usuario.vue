@@ -133,7 +133,7 @@
                           
         <v-flex xs12 sm6>
             <v-select
-            :items="list.tg_empleado"
+            :items="list.g_empleado"
             item-text="nb_empleado"
             item-value="id_empleado"
             v-model="form.id_empleado"
@@ -146,7 +146,7 @@
                   
         <v-flex xs12 sm6>
             <v-select
-            :items="list.tg_tipo_usuario"
+            :items="list.g_tipo_usuario"
             item-text="nb_tipo_usuario"
             item-value="id_tipo_usuario"
             v-model="form.id_tipo_usuario"
@@ -194,8 +194,6 @@ export default {
 	 	 	 	tx_password,
 	 	 	 	tx_correo,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
 	 	 	 	id_usuario_c,
 	 	 	 	
             },

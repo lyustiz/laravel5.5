@@ -5,6 +5,8 @@ namespace App\Http\Controllers\CrudGenerate;
 use App\Http\Controllers\CrudGenerate\Connection;
 use App\Http\Controllers\CrudGenerate\Meta;
 use App\Http\Controllers\CrudGenerate\ModelGenerator;
+use App\Http\Controllers\CrudGenerate\ControllerGenerator;
+use App\Http\Controllers\CrudGenerate\ViewGenerator;
 
 class CrudGenerate
 {
@@ -18,11 +20,11 @@ class CrudGenerate
     
     public function __construct(Connection $conection)
     {
-        $this->connector = $conection;
+        $this->connector  = $conection;
         
         $this->connection = $this->connector->connect();
 
-        $this->meta  = new Meta($this->connection);
+        $this->meta       = new Meta($this->connection);
     }
 
     public function generate()
@@ -31,12 +33,10 @@ class CrudGenerate
 
         $this->modelGenerate();
 
-        //$this->controllerGenerate();
+        $this->controllerGenerate();
 
-        //$this->viewGenerate();
+        $this->viewGenerate();
     }
-
-    
 
     public function modelGenerate()
     {
@@ -45,11 +45,25 @@ class CrudGenerate
         $modelGenerator->generate();
     }
 
+    public function controllerGenerate()
+    {
+        $controllerGenerator = new ControllerGenerator($this->tables);
+
+        $controllerGenerator->generate();
+    }
+
+    public function viewGenerate()
+    {
+        $viewGenerator = new ViewGenerator($this->tables);
+
+        $viewGenerator->generate(); 
+    }
+
     public function setConnection($ConnectionName)
     {
         $this->connection = $this->connector->connect($ConnectionName);
 
-        $this->meta  = new Meta($this->connection);
+        $this->meta       = new Meta($this->connection);
 
         return $this;
     }
@@ -75,15 +89,5 @@ class CrudGenerate
     {
         return $this->tables = $this->meta->getTableMetadata();
     }
-
-
-
-
-
-
-
-
-
-
-    
+   
 }

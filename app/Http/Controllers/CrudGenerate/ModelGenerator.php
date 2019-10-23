@@ -24,7 +24,27 @@ class ModelGenerator
     public function __construct($tables)
     {
         $this->tables = $tables;
-        $this->setConfig();
+
+        $this->config();
+    }
+
+    public function config()
+    {
+        $conf  = \Config::get('crudgenerate');
+
+        $paths = $conf['paths'];
+
+        $cols  = $conf['cols'];
+
+        $this->modelPath    = $paths['models'];
+
+        $this->templatePath = $paths['templates'] . 'model/';
+
+        $this->createdAt    = $cols['createdAt'];
+
+        $this->updatedAt    = $cols['updatedAt'];
+
+        $this->hiddenCols   = $cols['hiddenCols'];
     }
 
     public function generate()
@@ -32,15 +52,15 @@ class ModelGenerator
         foreach ($this->tables as $tableName => $table) 
         {
             $exitCode = $this->callMakeModel($table);
-
-            dd($table);
             
             if( $exitCode != 0 )
             {
                 dd('error al crear modelo de la tabla' . $tableName . 'cod'. $exitCode);
             }
-
-
+            
+            $definition = $this->definition($tableName, $table);
+            
+            $this->compile($table, $definition);
         }
     }
 
@@ -54,17 +74,13 @@ class ModelGenerator
                         '--factory'         => true,
                         '--resource'        => true,
                         '--no-interaction'  => true,
+                        '--force'           => $force,
                     ];
-        
-        if($force)
-        {
-            $options['--force']  = true;
-        }
 
         return \Artisan::call('make:model', $options);
     }
 
-    public function modelDefinition($tableName, $table)
+    public function definition($tableName, $table)
     {
         $primaryKey  = $table->primaryKey;
 
@@ -73,27 +89,28 @@ class ModelGenerator
         $hiddenCols  = $this->getHiddenCols();
 
         $constraints = $this->getConstraints($table);
-        
+
         return str_replace(
             [ '{{tableName}}', '{{pkColumn}}', '{{createdAt}}', '{{updatedAt}}', '{{showCols}}', '{{hiddenCols}}', '{{Constraints}}' ],
-            [ $tableName, $primaryKey, $this->createdAt, $this->updatedAt, $showCols, $hiddenCols, $constraints],
-            file_get_contents(app_path("../resources/templates/model/define.template"))
+            [ $tableName, $primaryKey, $this->createdAt, $this->updatedAt, $showCols, $hiddenCols, $constraints ],
+            file_get_contents(base_path( $this->templatePath . "define.template" ))
         );
     }
-
+    
     public function getShowCols($table)
     {
         $showColumns = [];
 
-        foreach ($table->columns as $column) 
+        foreach ($table->columns as $columnName => $column) 
         {
-            if(in_array($column->name, $this->hiddenCols))
+            if(in_array($columnName, $this->hiddenCols))
             {
                 continue;
             }
 
-            $showColumns[]   = $column->name;
+            $showColumns[] = $columnName;
         }
+
         return "'" . implode( "',". PHP_EOL ."\t \t \t \t \t \t \t'" , $showColumns ) . "'";
     }
 
@@ -104,13 +121,11 @@ class ModelGenerator
 
     public function getConstraints($table)
     {
-       
-       dd($table);
         $foreignKeys = $table->foreignKeys;
 
         $fkString = [];
         
-        if(count($foreingnKeys) > 0)
+        if( $foreignKeys != [] )
         {
             foreach ($foreignKeys as $foreignKey) 
             {
@@ -120,36 +135,29 @@ class ModelGenerator
 
                 $instanceName  = Str::camel($foreignKey->foreignTable);
 
-                $foreingColumn = $foreignKey->getForeignColumn;
+                $foreignColumn = $foreignKey->foreignColumn;
 
-                $fkStr[] = str_replace(
+                $fkString[] = str_replace(
                     [ '{{modelTableName}}', '{{functionTableName}}', '{{foreingColumn}}' ],
-                    [ $className, $instanceName, $foreingColumn ],
-                    file_get_contents(app_path($this->templatePath . 'constraints.template'))
+                    [ $className, $instanceName, $foreignColumn ],
+                    file_get_contents(base_path( $this->templatePath . 'constraints.template' ))
                 );
             }
         }
         return implode( PHP_EOL . PHP_EOL, $fkString );
     }
 
-    public function setConfig()
+    public function compile($table, $definition)
     {
-        $conf = \Config::get('crudgenerate');
+        $compiled =  str_replace(
+            [ '//' ],
+            [ $definition ],
+            file_get_contents(app_path($this->modelPath . $table->className . '.php'))
+        );
 
-        $paths = $conf['paths'];
-
-        $cols = $conf['cols'];
-
-        $this->modelPath    = $paths['models'];
-
-        $this->templatePath = $paths['templates'] . 'model/';
-
-        $this->createdAt    = $cols['createdAt'];
-
-        $this->updatedAt    = $cols['updatedAt'];
-
-        $this->hiddenCols   = $cols['hiddenCols'];
-        
+        file_put_contents(
+            app_path($this->modelPath . $table->className . '.php'),
+            $compiled
+        );
     }
-
 }

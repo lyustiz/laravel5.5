@@ -1,5 +1,5 @@
 $validate = request()->validate([
-                {{validateFields}}
+            {{validateFields}}
         ]);
 
         ${{modelInstance}} = ${{modelInstance}}->update($request->all());

@@ -157,8 +157,6 @@ export default {
 	 	 	 	nu_nivel_alerta,
 	 	 	 	tx_imagen,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
 	 	 	 	id_usuario,
 	 	 	 	tx_accion,
 	 	 	 	

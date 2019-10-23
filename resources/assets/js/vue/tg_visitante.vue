@@ -188,8 +188,6 @@ export default {
 	 	 	 	tx_cod_pais,
 	 	 	 	tx_telefono,
 	 	 	 	id_status,
-	 	 	 	fe_creado,
-	 	 	 	fe_actualizado,
 	 	 	 	id_usuario,
 	 	 	 	
             },

@@ -42,14 +42,14 @@ class Meta
     
             $primaryKey   = $this->getPrimaryKey($tableObject);
 
-            $foreingnKeys = $this->getForeignKeys($tableObject);
+            $foreingKeys  = $this->getForeignKeys($tableObject);
             
             $tables[$tablename] = [
                     'className'     => $className,
                     'instanceName'  => $instanceName,
                     'columns'       => $columns,
                     'primaryKey'    => $primaryKey,
-                    'foreingnKeys'  => $foreingnKeys
+                    'foreignKeys'   => $foreingKeys
             ];
         }
         return $tables;

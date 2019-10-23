@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TrBitacora;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TrBitacoraController extends Controller
 {
@@ -39,13 +40,13 @@ class TrBitacoraController extends Controller
     public function store(Request $request)
     {
         $validate = request()->validate([
-                'co_accion'         => 	'required|alpha_num|max:3',
-				'tx_tabla'          => 	'required|alpha_num|max:255',
-				'in_id_tabla'       => 	'required|integer|max:10',
-				'tx_old_valor'      => 	'required|alpha_num|max:4000',
-				'tx_new_valor'      => 	'required|alpha_num|max:4000',
-				'fe_accion'         => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'co_accion'         => 	'required|alpha_num|max:3',
+			'tx_tabla'          => 	'required|alpha_num|max:255',
+			'in_id_tabla'       => 	'required|integer|max:10',
+			'tx_old_valor'      => 	'required|alpha_num|max:4000',
+			'tx_new_valor'      => 	'required|alpha_num|max:4000',
+			'fe_accion'         => 	'required|date',
+			'id_usuario'        => 	'required|integer|max:10',
         ]);
 
         $trBitacora = trBitacora::create($request->all());
@@ -61,7 +62,7 @@ class TrBitacoraController extends Controller
      */
     public function show(TrBitacora $trBitacora)
     {
-        return trBitacora;
+        return $trBitacora;
     }
 
     /**
@@ -85,14 +86,14 @@ class TrBitacoraController extends Controller
     public function update(Request $request, TrBitacora $trBitacora)
     {
         $validate = request()->validate([
-                'id_bitacora'       => 	'required|integer|max:10',
-				'co_accion'         => 	'required|alpha_num|max:3',
-				'tx_tabla'          => 	'required|alpha_num|max:255',
-				'in_id_tabla'       => 	'required|integer|max:10',
-				'tx_old_valor'      => 	'required|alpha_num|max:4000',
-				'tx_new_valor'      => 	'required|alpha_num|max:4000',
-				'fe_accion'         => 	'required|date',
-				'id_usuario'        => 	'required|integer|max:10',
+            'id_bitacora'       => 	'required|integer|max:10',
+			'co_accion'         => 	'required|alpha_num|max:3',
+			'tx_tabla'          => 	'required|alpha_num|max:255',
+			'in_id_tabla'       => 	'required|integer|max:10',
+			'tx_old_valor'      => 	'required|alpha_num|max:4000',
+			'tx_new_valor'      => 	'required|alpha_num|max:4000',
+			'fe_accion'         => 	'required|date',
+			'id_usuario'        => 	'required|integer|max:10',
         ]);
 
         $trBitacora = $trBitacora->update($request->all());
