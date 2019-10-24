@@ -5,7 +5,7 @@ return [
     'paths' => [
         'models'      => 'Models/',
         'controllers' => 'Http/Controllers/',
-        'views'       => 'resources/assets/js/vue/',
+        'views'       => 'resources/assets/js/pages/',
         'templates'   => 'resources/templates/'
     ],
 

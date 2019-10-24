@@ -13,12 +13,20 @@ class Crud extends Controller
     {
         $this->crud = $crudGenerate;
     }
+
+    public function index()
+    {
+        $schemas = $this->crud->getSchemas();
+
+        return view('crud', compact('schemas'));
+
+    }
     
     public function generate()
     {
         $databases = $this->crud->getDatabases();
         
-        $schemas = $this->crud->getSchemas();
+        
 
         $schema = 'corpovex_visitas';
 

@@ -68,18 +68,24 @@ class ViewGenerator
 
     public function compile($definition, $tableName, $table)
     {
-        $this->createDirectory();
+        $this->createDirectory($table->className);
 
         //list
-        return file_put_contents(
-            base_path( $this->viewPath .'list/'. $tableName . ".vue"),
+        $listGenerate =  file_put_contents(
+            base_path( $this->viewPath . $table->className . '/'. $table->className . ".vue"),
             $this->compileList($definition, $tableName, $table)
         );
+
         //form
-        return file_put_contents(
-            base_path( $this->viewPath .'form/'. $tableName . ".vue"),
+        $formGenerate = file_put_contents(
+            base_path( $this->viewPath . $table->className. '/' . $table->className . "Form.vue"),
             $this->compileForm($definition, $tableName, $table)
         );
+
+        if($listGenerate === false || $formGenerate === false)
+        {
+            dd('Error al generar list/form de la tabla '. $tableName );
+        };
     }
 
     protected function compileList($definition, $tableName, $table)
@@ -88,12 +94,12 @@ class ViewGenerator
         
         $listColumns = $this->compileListColumns($tableName, $table);
 
-        $formName    = Str::studly($tableName) . '_form';
+        $formName    = Str::kebab($table->className) . '-form';
        
         return str_replace(
-            ['{{primaryKey}}', '{{className}}', '{{instanceName}}', '{{formName}}', '{{headers}}', '{{listColumns}}',],
-            [$table->primaryKey, $table->className, $table->instanceName, $formName, $headers, $listColumns ],
-            file_get_contents(base_path( $this->templatePath . "/form.template" ))
+            ['{{primaryKey}}', '{{className}}', '{{instanceName}}', '{{formName}}', '{{headers}}', '{{listColumns}}', '{{slugName}}',],
+            [$table->primaryKey, $table->className, $table->instanceName, $formName, $headers, $listColumns, Str::kebab($table->className) ],
+            file_get_contents(base_path( $this->templatePath . "/list.template" ))
         );
     }
     
@@ -117,11 +123,12 @@ class ViewGenerator
 
         foreach ($table->columns as $columnName => $column) 
         {
-            $headers[$tableName] = $this->defineHeaders($columnName);
+            $headers[] = $this->defineHeaders($columnName);
         }
 
-        return implode(  PHP_EOL ."\t\t\t'" , $headers );
+        return implode(  PHP_EOL ."\t\t\t" , $headers );
     }
+    
 
     public function compileListColumns($tableName, $table)
     {
@@ -129,10 +136,10 @@ class ViewGenerator
 
         foreach ($table->columns as $columnName => $column) 
         {
-            $listColumns[$tableName] = $this->defineHeaders($columnName);
+            $listColumns[] = $this->defineListColumns($columnName);
         }
 
-        return implode(  PHP_EOL ."\t\t\t\t\t'" , $listColumns );
+        return implode(  PHP_EOL ."\t\t\t\t\t" , $listColumns );
     }
 
     public function defineHeaders($columnName)
@@ -226,14 +233,14 @@ class ViewGenerator
 
     public function formatTableColumns($columns)
     {
-        $formColumns = null;
+        $formColumns = [];
 
         foreach ($columns as $columnName => $column) 
         {
-            $formColumns .= $columnName . ','. PHP_EOL ."\t \t \t \t";
+            $formColumns[] = $columnName . ',';
         }
 
-        return $formColumns;
+        return implode(  PHP_EOL ."\t\t\t\t" , $formColumns ) ;
     }
 
     public function formatForeingTables()
@@ -248,7 +255,6 @@ class ViewGenerator
         }
 
         return implode(  PHP_EOL ."\t \t \t \t \t \t \t'" , $formatTable ) ;
-          
     }
 
     public function getPrefix($columnName)
@@ -264,15 +270,12 @@ class ViewGenerator
     }
 
     //global
-    public function createDirectory()
+    public function createDirectory($className)
     {
-        if (! is_dir($directory = base_path( $this->viewPath . 'list/' ))) {
+        if (! is_dir($directory = base_path( $this->viewPath . $className . '/' ))) {
             mkdir($directory, 0755, true);
         }
 
-        if (! is_dir($directory = base_path( $this->viewPath . 'form/' ))) {
-            mkdir($directory, 0755, true);
-        }
     }
 
 }

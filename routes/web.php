@@ -11,12 +11,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/crud', 'crud@index')->name('crud');
+Route::post('/crud', 'crud@generate')->name('generate');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'CrudGenerate@generate')->name('crudg');
 
-Route::get('/crud', 'crud@generate')->name('crud');
+
 
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+

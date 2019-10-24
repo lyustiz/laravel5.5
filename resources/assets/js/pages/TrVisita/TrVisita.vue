@@ -21,14 +21,28 @@
                 :items  ="items"
                 :search ="search"
                 v-model ="selected"
-                item-key="{{primaryKey}}"
+                item-key="id_visita"
                 :loading="isLoading"
                 sort-by=""
             >
 
                 <template slot="items" slot-scope="item">
 
-                    {{listColumns}}
+                    <td class="text-xs-left">{{ item.item.id_visita }}</td>
+					<td class="text-xs-left">{{ item.item.id_visitante }}</td>
+					<td class="text-xs-left">{{ item.item.id_ced_empleado }}</td>
+					<td class="text-xs-left">{{ item.item.id_empresa }}</td>
+					<td class="text-xs-left">{{ item.item.id_tipo_visitante }}</td>
+					<td class="text-xs-left">{{ item.item.tx_cargo }}</td>
+					<td class="text-xs-left">{{ item.item.id_motivo }}</td>
+					<td class="text-xs-left">{{ item.item.tx_observaciones }}</td>
+					<td class="text-xs-left">{{ item.item.nu_carnet }}</td>
+					<td class="text-xs-left">{{ item.item.fe_entrada }}</td>
+					<td class="text-xs-left">{{ item.item.fe_salida }}</td>
+					<td class="text-xs-left">{{ item.item.id_status }}</td>
+					<td class="text-xs-left">{{ item.item.fe_creado }}</td>
+					<td class="text-xs-left">{{ item.item.fe_actualizado }}</td>
+					<td class="text-xs-left">{{ item.item.id_usuario }}</td>
                     
                 
                     <td class="text-xs-center">
@@ -45,12 +59,12 @@
                 @modalClose="modalClose()"
                 :head-color="$App.theme.headModal"
             >
-                <{{formName}}
+                <tr-visita-form
                     :accion="accion"
                     :item="item"
                     :titulo="titulo"
                     @modalClose="modalClose()"
-                ></{{formName}}>
+                ></tr-visita-form>
 
             </app-modal>
 
@@ -71,16 +85,30 @@
 
 <script>
 import listHelper from '~/mixins/Applist';
-import {{className}}Form  from '{{className}}Form';
+import TrVisitaForm  from 'TrVisitaForm';
 export default {
     mixins:     [ listHelper],
-    components: { '{{slugName}}-form': {{className}}Form },
+    components: { 'tr-visita-form': TrVisitaForm },
     data () {
     return {
-        titulo: '{{className}}',
+        titulo: 'TrVisita',
         headers: [
             
-            {{headers}}
+            { text: 'Visita',   value: 'id_visita' },
+			{ text: 'Visitante',   value: 'id_visitante' },
+			{ text: 'Ced Empleado',   value: 'id_ced_empleado' },
+			{ text: 'Empresa',   value: 'id_empresa' },
+			{ text: 'Tipo Visitante',   value: 'id_tipo_visitante' },
+			{ text: 'Cargo',   value: 'tx_cargo' },
+			{ text: 'Motivo',   value: 'id_motivo' },
+			{ text: 'Observaciones',   value: 'tx_observaciones' },
+			{ text: 'Carnet',   value: 'nu_carnet' },
+			{ text: 'Entrada',   value: 'fe_entrada' },
+			{ text: 'Salida',   value: 'fe_salida' },
+			{ text: 'Status',   value: 'id_status' },
+			{ text: 'Creado',   value: 'fe_creado' },
+			{ text: 'Actualizado',   value: 'fe_actualizado' },
+			{ text: 'Usuario',   value: 'id_usuario' },
 
             { text: 'Acciones', value: 'id_status'  },
         ],
@@ -92,7 +120,7 @@ export default {
 
             this.isLoading = false
         
-           axios.get('api/{{instanceName}}')
+           axios.get('api/trVisita')
             .then(respuesta => {
                 this.items = respuesta.data;
                 this.isLoading = false
@@ -103,7 +131,7 @@ export default {
             })
         },
         delItem(){
-            axios.delete('/api/v1/{{instanceName}}/'+this.item.{{primaryKey}})
+            axios.delete('/api/v1/trVisita/'+this.item.id_visita)
             .then(respuesta => {
                 this.verMsj(respuesta.data.msj)
                 this.list();

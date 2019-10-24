@@ -21,14 +21,23 @@
                 :items  ="items"
                 :search ="search"
                 v-model ="selected"
-                item-key="{{primaryKey}}"
+                item-key="id_visitante_alerta"
                 :loading="isLoading"
                 sort-by=""
             >
 
                 <template slot="items" slot-scope="item">
 
-                    {{listColumns}}
+                    <td class="text-xs-left">{{ item.item.id_visitante_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.id_visitante }}</td>
+					<td class="text-xs-left">{{ item.item.id_tipo_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.id_visita }}</td>
+					<td class="text-xs-left">{{ item.item.tx_motivo_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.tx_anulacion }}</td>
+					<td class="text-xs-left">{{ item.item.id_status }}</td>
+					<td class="text-xs-left">{{ item.item.fe_creado }}</td>
+					<td class="text-xs-left">{{ item.item.fe_actualizado }}</td>
+					<td class="text-xs-left">{{ item.item.id_usuario }}</td>
                     
                 
                     <td class="text-xs-center">
@@ -45,12 +54,12 @@
                 @modalClose="modalClose()"
                 :head-color="$App.theme.headModal"
             >
-                <{{formName}}
+                <tr-visitante-alerta-form
                     :accion="accion"
                     :item="item"
                     :titulo="titulo"
                     @modalClose="modalClose()"
-                ></{{formName}}>
+                ></tr-visitante-alerta-form>
 
             </app-modal>
 
@@ -71,16 +80,25 @@
 
 <script>
 import listHelper from '~/mixins/Applist';
-import {{className}}Form  from '{{className}}Form';
+import TrVisitanteAlertaForm  from 'TrVisitanteAlertaForm';
 export default {
     mixins:     [ listHelper],
-    components: { '{{slugName}}-form': {{className}}Form },
+    components: { 'tr-visitante-alerta-form': TrVisitanteAlertaForm },
     data () {
     return {
-        titulo: '{{className}}',
+        titulo: 'TrVisitanteAlerta',
         headers: [
             
-            {{headers}}
+            { text: 'Visitante Alerta',   value: 'id_visitante_alerta' },
+			{ text: 'Visitante',   value: 'id_visitante' },
+			{ text: 'Tipo Alerta',   value: 'id_tipo_alerta' },
+			{ text: 'Visita',   value: 'id_visita' },
+			{ text: 'Motivo Alerta',   value: 'tx_motivo_alerta' },
+			{ text: 'Anulacion',   value: 'tx_anulacion' },
+			{ text: 'Status',   value: 'id_status' },
+			{ text: 'Creado',   value: 'fe_creado' },
+			{ text: 'Actualizado',   value: 'fe_actualizado' },
+			{ text: 'Usuario',   value: 'id_usuario' },
 
             { text: 'Acciones', value: 'id_status'  },
         ],
@@ -92,7 +110,7 @@ export default {
 
             this.isLoading = false
         
-           axios.get('api/{{instanceName}}')
+           axios.get('api/trVisitanteAlerta')
             .then(respuesta => {
                 this.items = respuesta.data;
                 this.isLoading = false
@@ -103,7 +121,7 @@ export default {
             })
         },
         delItem(){
-            axios.delete('/api/v1/{{instanceName}}/'+this.item.{{primaryKey}})
+            axios.delete('/api/v1/trVisitanteAlerta/'+this.item.id_visitante_alerta)
             .then(respuesta => {
                 this.verMsj(respuesta.data.msj)
                 this.list();

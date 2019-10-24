@@ -21,14 +21,22 @@
                 :items  ="items"
                 :search ="search"
                 v-model ="selected"
-                item-key="{{primaryKey}}"
+                item-key="id_tipo_alerta"
                 :loading="isLoading"
                 sort-by=""
             >
 
                 <template slot="items" slot-scope="item">
 
-                    {{listColumns}}
+                    <td class="text-xs-left">{{ item.item.id_tipo_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.nb_tipo_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.nu_nivel_alerta }}</td>
+					<td class="text-xs-left">{{ item.item.tx_imagen }}</td>
+					<td class="text-xs-left">{{ item.item.id_status }}</td>
+					<td class="text-xs-left">{{ item.item.fe_creado }}</td>
+					<td class="text-xs-left">{{ item.item.fe_actualizado }}</td>
+					<td class="text-xs-left">{{ item.item.id_usuario }}</td>
+					<td class="text-xs-left">{{ item.item.tx_accion }}</td>
                     
                 
                     <td class="text-xs-center">
@@ -45,12 +53,12 @@
                 @modalClose="modalClose()"
                 :head-color="$App.theme.headModal"
             >
-                <{{formName}}
+                <tg-tipo-alerta-form
                     :accion="accion"
                     :item="item"
                     :titulo="titulo"
                     @modalClose="modalClose()"
-                ></{{formName}}>
+                ></tg-tipo-alerta-form>
 
             </app-modal>
 
@@ -71,16 +79,24 @@
 
 <script>
 import listHelper from '~/mixins/Applist';
-import {{className}}Form  from '{{className}}Form';
+import TgTipoAlertaForm  from 'TgTipoAlertaForm';
 export default {
     mixins:     [ listHelper],
-    components: { '{{slugName}}-form': {{className}}Form },
+    components: { 'tg-tipo-alerta-form': TgTipoAlertaForm },
     data () {
     return {
-        titulo: '{{className}}',
+        titulo: 'TgTipoAlerta',
         headers: [
             
-            {{headers}}
+            { text: 'Tipo Alerta',   value: 'id_tipo_alerta' },
+			{ text: 'Tipo Alerta',   value: 'nb_tipo_alerta' },
+			{ text: 'Nivel Alerta',   value: 'nu_nivel_alerta' },
+			{ text: 'Imagen',   value: 'tx_imagen' },
+			{ text: 'Status',   value: 'id_status' },
+			{ text: 'Creado',   value: 'fe_creado' },
+			{ text: 'Actualizado',   value: 'fe_actualizado' },
+			{ text: 'Usuario',   value: 'id_usuario' },
+			{ text: 'Accion',   value: 'tx_accion' },
 
             { text: 'Acciones', value: 'id_status'  },
         ],
@@ -92,7 +108,7 @@ export default {
 
             this.isLoading = false
         
-           axios.get('api/{{instanceName}}')
+           axios.get('api/tgTipoAlerta')
             .then(respuesta => {
                 this.items = respuesta.data;
                 this.isLoading = false
@@ -103,7 +119,7 @@ export default {
             })
         },
         delItem(){
-            axios.delete('/api/v1/{{instanceName}}/'+this.item.{{primaryKey}})
+            axios.delete('/api/v1/tgTipoAlerta/'+this.item.id_tipo_alerta)
             .then(respuesta => {
                 this.verMsj(respuesta.data.msj)
                 this.list();

@@ -21,14 +21,19 @@
                 :items  ="items"
                 :search ="search"
                 v-model ="selected"
-                item-key="{{primaryKey}}"
+                item-key="id_tipo_visitante"
                 :loading="isLoading"
                 sort-by=""
             >
 
                 <template slot="items" slot-scope="item">
 
-                    {{listColumns}}
+                    <td class="text-xs-left">{{ item.item.id_tipo_visitante }}</td>
+					<td class="text-xs-left">{{ item.item.nb_tipo_visitante }}</td>
+					<td class="text-xs-left">{{ item.item.id_status }}</td>
+					<td class="text-xs-left">{{ item.item.fe_creado }}</td>
+					<td class="text-xs-left">{{ item.item.fe_actualizado }}</td>
+					<td class="text-xs-left">{{ item.item.id_usuario }}</td>
                     
                 
                     <td class="text-xs-center">
@@ -45,12 +50,12 @@
                 @modalClose="modalClose()"
                 :head-color="$App.theme.headModal"
             >
-                <{{formName}}
+                <tg-tipo-visitante-form
                     :accion="accion"
                     :item="item"
                     :titulo="titulo"
                     @modalClose="modalClose()"
-                ></{{formName}}>
+                ></tg-tipo-visitante-form>
 
             </app-modal>
 
@@ -71,16 +76,21 @@
 
 <script>
 import listHelper from '~/mixins/Applist';
-import {{className}}Form  from '{{className}}Form';
+import TgTipoVisitanteForm  from 'TgTipoVisitanteForm';
 export default {
     mixins:     [ listHelper],
-    components: { '{{slugName}}-form': {{className}}Form },
+    components: { 'tg-tipo-visitante-form': TgTipoVisitanteForm },
     data () {
     return {
-        titulo: '{{className}}',
+        titulo: 'TgTipoVisitante',
         headers: [
             
-            {{headers}}
+            { text: 'Tipo Visitante',   value: 'id_tipo_visitante' },
+			{ text: 'Tipo Visitante',   value: 'nb_tipo_visitante' },
+			{ text: 'Status',   value: 'id_status' },
+			{ text: 'Creado',   value: 'fe_creado' },
+			{ text: 'Actualizado',   value: 'fe_actualizado' },
+			{ text: 'Usuario',   value: 'id_usuario' },
 
             { text: 'Acciones', value: 'id_status'  },
         ],
@@ -92,7 +102,7 @@ export default {
 
             this.isLoading = false
         
-           axios.get('api/{{instanceName}}')
+           axios.get('api/tgTipoVisitante')
             .then(respuesta => {
                 this.items = respuesta.data;
                 this.isLoading = false
@@ -103,7 +113,7 @@ export default {
             })
         },
         delItem(){
-            axios.delete('/api/v1/{{instanceName}}/'+this.item.{{primaryKey}})
+            axios.delete('/api/v1/tgTipoVisitante/'+this.item.id_tipo_visitante)
             .then(respuesta => {
                 this.verMsj(respuesta.data.msj)
                 this.list();
